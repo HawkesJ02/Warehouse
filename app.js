@@ -55,9 +55,9 @@ const packages = [{
 function draw_home(array) {
   let box_sorter = document.getElementById('main_screen')
   let foundbox = ` `
-  packages.forEach(boxes => {
+  array.forEach(boxes => {
    foundbox += `
-   <div class="p-2">
+   <div class="p-1">
     TO: ${boxes.to},
     TRACKING NUMBER: ${boxes.trackingNumber}
     WEIGHT: ${boxes.weight}
@@ -68,56 +68,21 @@ function draw_home(array) {
   // @ts-ignore
   box_sorter.innerHTML = foundbox
   }
-
-draw_home()
-
-
-
-function draw_weights(array) {
- let box_sorter = document.getElementById('main_screen')
- let foundbox = ` `
- array.forEach(boxes => {
-  foundbox += `
-  <div class="p-2"> BOX WEIGHT: ${boxes.weight}, ${boxes.isFragile} </div>
-  `
-});
- // @ts-ignore
- box_sorter.innerHTML = foundbox
- } 
-
  function draw_weight_filter(){
   const heavy_boxes = packages.filter(boxes => boxes.weight >= 3 )
-  console.log(heavy_boxes);
-  draw_weights(heavy_boxes)
+  draw_home(heavy_boxes);
  }
 
- function draw_priority() {
-  let box_sorter = document.getElementById('main_screen')
-  let foundbox = ` `
-  packages.forEach(boxes => {
-   foundbox += `<div class="p-2"> PRIORITY: ${boxes.priorityLevel} </div>`
- });
-  // @ts-ignore
-  box_sorter.innerHTML = foundbox
-  }
-
-  function draw_fragile(array) {
-    let box_sorter = document.getElementById('main_screen')
-    let foundbox = ` `
-    array.forEach(boxes => {
-     foundbox += `<div class="p-2"> FRAGILE: ${boxes.isFragile}</div>`
-   });
-    // @ts-ignore
-    box_sorter.innerHTML = foundbox
-    }
-
-function fragile_filter(){
-  const fragile_boxes = packages.filter(boxes => boxes.isFragile == true)
-  console.log(fragile_boxes);
-  draw_fragile(fragile_boxes);
+function priority_filter(){
+  const priority_boxes = packages.filter(boxes => boxes.priorityLevel === 'express')
+  draw_home(priority_boxes)
 }
 
-fragile_filter()
+function fragile_filter(){
+  const fragile_boxes = packages.filter(boxes => boxes.isFragile === true)
+  draw_home(fragile_boxes);
+}
+
 
 
 
